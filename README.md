@@ -20,13 +20,17 @@ A fully-featured GUI-based application for interacting with smart cards using Py
 •	Tkinter
 •	pyscard (for smart card communication)
 # Installation
-1.  Clone the repository
+1.  Clone the repository:
+
 git clone https://github.com/Chrisadams777/Smart-card-interaction-GUI.git
-2.  Go to the file
+2.  Go to the file:
+
 cd smart-card-interaction-gui
 3.	Install required Python packages:
+
 pip install -r requirements.txt
 4.	Run the application:
+
 python smart_card_gui.py
 # Contribution
 Contributions are welcome! Please fork the repository and create a pull request for any new features, bug fixes, or improvements.
