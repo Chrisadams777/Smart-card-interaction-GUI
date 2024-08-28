@@ -21,11 +21,11 @@ apdu_commands = {
 # Function to initialize the selected device
 def initialize_device(device_name):
     global selected_device
-    available_readers = readers()
+    available_readers = reader.readers()
     
-    for reader in available_readers:
-        if device_name in reader.name:
-            selected_device = reader
+    for rdr in available_readers:
+        if device_name in rdr.name:
+            selected_device = rdr
             output_text.insert(tk.END, f"Selected device: {device_name}\n")
             return
     
