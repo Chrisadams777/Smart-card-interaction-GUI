@@ -23,7 +23,7 @@ A fully-featured GUI-based application for interacting with smart cards using Py
 1.	Clone the repository:
 bash
 Copy code
-git clone https://github.com/yourusername/smart-card-interaction-gui.git
+git clone https://github.com/Chrisadams777/Smart-card-interaction-GUI.git
 cd smart-card-interaction-gui
 2.	Install required Python packages:
 bash
