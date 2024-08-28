@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import ttk, messagebox, filedialog
-from smartcard import readers
+from smartcard import reader
 from smartcard.util import toHexString
 import os
 import json
