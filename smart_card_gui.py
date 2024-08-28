@@ -105,6 +105,9 @@ def read_card_data(card, card_type):
     elif card_type == "Payment Card":
         apdu_command = [0x00, 0xB2, 0x01, 0x0C, 0x00]  # Example APDU for reading payment card data
         return send_apdu_command(card, apdu_command)
+    elif card_type == "Java Card":
+        apdu_command = [0x00, 0xA4, 0x04, 0x00, 0x0A]  # Example APDU for Java Card
+        return send_apdu_command(card, apdu_command)
     else:
         raise ValueError("Unsupported card type.")
 
@@ -124,19 +127,10 @@ def write_card_data(card, card_type, data):
 
 # Function to emulate POS transaction
 def emulate_pos_transaction(card, transaction_type):
-    if transaction_type == "credit":
-        apdu_command = [0x00, 0xA4, 0x04, 0x00, 0x0E]
-    elif transaction_type == "debit":
-        apdu_command = [0x00, 0xA4, 0x04, 0x00, 0x0F]
-    elif transaction_type == "loyalty":
-        apdu_command = [0x00, 0xA4, 0x04, 0x00, 0x10]
-    elif transaction_type == "gift":
-        apdu_command = [0x00, 0xA4, 0x04, 0x00, 0x11]
-    elif transaction_type == "tap-to-pay":
-        apdu_command = [0x00, 0xA4, 0x04, 0x00, 0x12]
-    else:
-        raise ValueError("Unsupported transaction type.")
+    amount = transaction_amount_entry.get()  # Allow users to specify the transaction amount
+    apdu_command = [0x00, 0xA4, 0x04, 0x00, 0x0E]  # Example APDU; update based on type and amount
     send_apdu_command(card, apdu_command)
+    output_text.insert(tk.END, f"{transaction_type.capitalize()} transaction for ${amount} complete.\n")
 
 # Function to interact with Java Card
 def interact_with_java_card(card, operation):
@@ -191,7 +185,11 @@ def load_data():
 # GUI Setup
 root = tk.Tk()
 root.title("Smart Card Interaction GUI")
-root.geometry("800x600")
+
+# Automatically adjust the GUI size based on the screen resolution
+screen_width = root.winfo_screenwidth()
+screen_height = root.winfo_screenheight()
+root.geometry(f"{int(screen_width*0.75)}x{int(screen_height*0.75)}")
 
 # Device Selection
 device_label = tk.Label(root, text="Select Device:")
@@ -211,7 +209,7 @@ card_type_label = tk.Label(root, text="Select Card Type:")
 card_type_label.pack(pady=5)
 card_type_var = tk.StringVar()
 card_type_dropdown = ttk.Combobox(root, textvariable=card_type_var)
-card_type_dropdown['values'] = ("Payment Card", "MIFARE", "NDEF")
+card_type_dropdown['values'] = ("Payment Card", "MIFARE", "NDEF", "Java Card")
 card_type_dropdown.pack(pady=5)
 card_type_dropdown.current(0)
 
@@ -280,11 +278,24 @@ save_button.pack(pady=5)
 load_button = tk.Button(root, text="Load Data", command=load_data)
 load_button.pack(pady=5)
 
-# Output Text Area
+# Settings Button
+settings_button = tk.Button(root, text="Settings", command=open_settings)
+settings_button.pack(pady=5)
+
+# Output Text Area with Scrollbar
 output_label = tk.Label(root, text="Output:")
 output_label.pack(pady=5)
-output_text = tk.Text(root, height=15, width=80)
-output_text.pack(pady=5)
+
+output_frame = tk.Frame(root)
+output_frame.pack(pady=5, fill=tk.BOTH, expand=True)
+
+output_text = tk.Text(output_frame, height=15, width=80, wrap=tk.WORD)
+output_text.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+
+scrollbar = tk.Scrollbar(output_frame, command=output_text.yview)
+scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
+
+output_text.config(yscrollcommand=scrollbar.set)
 
 # Run the GUI
 root.mainloop()
