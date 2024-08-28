@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import ttk, messagebox, filedialog
-from smartcard import reader
+from smartcard.System import readers
 from smartcard.util import toHexString
 import os
 import json
@@ -21,7 +21,7 @@ apdu_commands = {
 # Function to initialize the selected device
 def initialize_device(device_name):
     global selected_device
-    available_readers = reader.readers()
+    available_readers = readers()
     
     for rdr in available_readers:
         if device_name in rdr.name:
