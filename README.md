@@ -2,11 +2,17 @@
 A fully-featured GUI-based application for interacting with smart cards using Python and Tkinter. This project supports various card types such as MIFARE, NDEF, and payment cards, with capabilities including reading, writing, emulating POS transactions, and more. Designed for use with devices like the ACR122U and Omnikey 3021.
 # Key Features
 •	Device and Card Type Selection: Easily choose between supported devices and card types directly from the GUI.
-•	Comprehensive APDU Command Library: Execute predefined APDU commands like SELECT, READ_RECORD, WRITE_BINARY, GET_RESPONSE, and VERIFY_PIN, with options to customize and send your own APDU commands.
+
+•Comprehensive APDU Command Library: Execute predefined APDU commands like SELECT, READ_RECORD, WRITE_BINARY, GET_RESPONSE, and VERIFY_PIN, with options to customize and send your own APDU commands.
+
 •	Java Card Interaction: Simulate payment card transactions and flash custom applets to Java Cards.
+
 •	NDEF Tag Handling: Read from and write to NDEF tags using example APDU commands.
+
 •	Brute-force MIFARE Cards: Utilize a brute-force utility to systematically attempt reading secured blocks on MIFARE cards.
+
 •	Error Handling: Toggle between detailed and simple error handling modes to suit your debugging needs.
+
 •	Data Management: Save and load device and card configurations to/from JSON files for easy reuse.
 # How to Use
 1.	Select Device: Choose a smart card reader (e.g., ACR122U or Omnikey 3021).
@@ -17,7 +23,9 @@ A fully-featured GUI-based application for interacting with smart cards using Py
 6.	Save/Load Configurations: Save your current setup to a file or load a previously saved configuration for quick access.
 # Requirements
 •	Python 3.x
+
 •	Tkinter
+
 •	pyscard (for smart card communication)
 # Installation
 1.  git clone https://github.com/Chrisadams777/Smart-card-interaction-GUI.git
